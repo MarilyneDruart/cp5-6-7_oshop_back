@@ -50,6 +50,50 @@ $router->map(
     'main-home'
 );
 
+// routes de catégories
+$router->map(
+    'GET', // La méthode HTTP autorisée pour cette route
+    '/category_list', // Partie de l'URL qui correspond à la page demandée (route)
+    [
+        'method' => 'categoryList',
+        'controller' => '\App\Controllers\CategoryController' // On indique le FQCN de la classe
+    ],
+    'category-list' // Identifiant unique de la route
+);
+
+$router->map(
+    'GET', // La méthode HTTP autorisée pour cette route
+    '/category_add', // Partie de l'URL qui correspond à la page demandée (route)
+    [
+        'method' => 'categoryAdd',
+        'controller' => '\App\Controllers\CategoryController' // On indique le FQCN de la classe
+    ],
+    'category-add' // Identifiant unique de la route
+);
+
+// routes de produits
+
+$router->map(
+    'GET', // La méthode HTTP autorisée pour cette route
+    '/products_list', // Partie de l'URL qui correspond à la page demandée (route)
+    [
+        'method' => 'productsList',
+        'controller' => '\App\Controllers\ProductsController' // On indique le FQCN de la classe
+    ],
+    'products-list' // Identifiant unique de la route
+);
+
+$router->map(
+    'GET', // La méthode HTTP autorisée pour cette route
+    '/products_add', // Partie de l'URL qui correspond à la page demandée (route)
+    [
+        'method' => 'productsAdd',
+        'controller' => '\App\Controllers\ProductsController' // On indique le FQCN de la classe
+    ],
+    'products-add' // Identifiant unique de la route
+);
+
+
 
 /* -------------
 --- DISPATCH ---
