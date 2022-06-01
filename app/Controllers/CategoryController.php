@@ -11,15 +11,19 @@ class CategoryController extends CoreController {
      * 
      */
     public function categoryList() {
-        $categoryObject = new Category;
-        $categoryList = $categoryObject->findAll();
+        // Instanciation de la classe Category
+        $categoryClass = new Category();
 
-        $this->show('/category/category_list');
+        // Je récupère toutes les catégories grâce à la méthode findAll du model Category.
+        $categoryList = $categoryClass->findAll();
+        $this->show('category/category_list', [
+            'categoryList' => $categoryList
+        ]);
     }
 
     public function categoryAdd() {
 
-        $this->show('/category/category_add');
+        $this->show('category/category_add');
     }
 
     
