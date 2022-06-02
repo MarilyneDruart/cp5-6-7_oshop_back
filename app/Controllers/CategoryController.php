@@ -28,5 +28,33 @@ class CategoryController extends CoreController {
         $this->show('category/category_add');
     }
 
-    
+    public function categoryCreate() {
+
+        $this->show('category/category_add');
+        $name = $_POST ['categName'];
+        $subtitle = $_POST ['categSubtitle'];
+        $picture = $_POST ['categPicture'];
+        
+        //dump($_POST);
+
+        if (!empty($_POST['categName']) && !empty($_POST['categSubtitle']) && !empty($_POST['categSubtitle'])) {
+            $name = $_POST['categName'];
+            $subtitle = $_POST['categSubtitle'];
+            $picture = $_POST['categPicture'];
+            // dump($name);
+            // dump($subtitle);
+            // dump($picture);
+
+            // Pour insérer en DB, je crée d'abord une nouvelle instance du Model correspondant
+            $post = new Category();
+
+            // Puis je renseigne les valeurs pour chaque propriété correspondante dans l'instance.
+            $post->setName($name);
+            $post->setSubtitle($subtitle);
+            $post->setPicture($picture);
+
+            // En dernier, j'appelle la méthode du Model permettant d'ajouter en DB.
+            $post->insert();
+        }
+    }
 }
