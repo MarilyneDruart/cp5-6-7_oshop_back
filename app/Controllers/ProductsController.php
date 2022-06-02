@@ -11,7 +11,7 @@ class ProductsController extends CoreController {
      * 
      */
     public function productsList() {
-        // Instanciation de la classe Category
+        // Instanciation de la classe Category (pas obligé d'utiliser la méthode en static comme dans CategoryController)
         $productClass = new Product();
 
         // Je récupère tous les produits grâce à la méthode findAll du model Product.

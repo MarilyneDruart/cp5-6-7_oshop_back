@@ -53,7 +53,7 @@ $router->map(
 // routes de catégories
 $router->map(
     'GET', // La méthode HTTP autorisée pour cette route
-    '/category_list', // Partie de l'URL qui correspond à la page demandée (route)
+    '/category/category_list', // Partie de l'URL qui correspond à la page demandée (route)
     [
         'method' => 'categoryList',
         'controller' => '\App\Controllers\CategoryController' // On indique le FQCN de la classe
@@ -63,7 +63,7 @@ $router->map(
 
 $router->map(
     'GET', // La méthode HTTP autorisée pour cette route
-    '/category_add', // Partie de l'URL qui correspond à la page demandée (route)
+    '/category/category_add', // Partie de l'URL qui correspond à la page demandée (route)
     [
         'method' => 'categoryAdd',
         'controller' => '\App\Controllers\CategoryController' // On indique le FQCN de la classe
@@ -75,7 +75,7 @@ $router->map(
 
 $router->map(
     'GET', // La méthode HTTP autorisée pour cette route
-    '/products_list', // Partie de l'URL qui correspond à la page demandée (route)
+    '/products/products_list', // Partie de l'URL qui correspond à la page demandée (route)
     [
         'method' => 'productsList',
         'controller' => '\App\Controllers\ProductsController' // On indique le FQCN de la classe
@@ -85,7 +85,7 @@ $router->map(
 
 $router->map(
     'GET', // La méthode HTTP autorisée pour cette route
-    '/products_add', // Partie de l'URL qui correspond à la page demandée (route)
+    '/products/products_add', // Partie de l'URL qui correspond à la page demandée (route)
     [
         'method' => 'productsAdd',
         'controller' => '\App\Controllers\ProductsController' // On indique le FQCN de la classe
