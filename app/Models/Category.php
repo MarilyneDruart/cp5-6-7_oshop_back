@@ -119,7 +119,6 @@ class Category extends CoreModel
 
     /**
      * Méthode permettant de récupérer tous les enregistrements de la table category
-     * On ajoute static, la méthode appartient ... voir replay depuis 11h03 +doc https://www.php.net/manual/fr/language.oop5.static.php
      *
      * @return Category[]
      */
@@ -159,7 +158,7 @@ class Category extends CoreModel
     public static function findTheFirstThree()
     {
         $pdo = Database::getPDO();
-        $sql = 'SELECT * FROM `category` LIMIT 3';
+        $sql = 'SELECT * FROM category LIMIT 3';
         $pdoStatement = $pdo->query($sql);
         $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Category');
 
@@ -168,20 +167,23 @@ class Category extends CoreModel
 
     public function insert()
     {
-        // Récupération de l'objet PDO représentant la connexion à la DB
         $pdo = Database::getPDO();
 
-        // Ecriture de la requête INSERT INTO
-        $sql = "
-            INSERT INTO `category` (name, subtitle, picture)
-            VALUES ({$this->name}, {$this->subtitle}, {$this->picture})
-        ";
+        // On formatte notre future requête SQL avec nos paramètres nommés
+        $sql = 'INSERT INTO category (name, subtitle, picture) VALUES (:name, :subtitle, :picture)';
 
-        // Execution de la requête d'insertion (exec, pas query)
-        $insertedRows = $pdo->exec($sql);
+        // 1. On prépare notre requête
+        $query = $pdo->prepare($sql);
 
-        // Si au moins une ligne ajoutée
-        if ($insertedRows > 0) {
+        // 2. On exécute la requête SQL en lui transmettant des valeurs pour les paramètres nommés
+        // execute retourne true si tout s'est passé et false sinon
+        $success = $query->execute([
+            ':name' => $this->name,
+            ':subtitle' => $this->subtitle,
+            ':picture' => $this->picture,
+        ]);
+
+        if ($success) {
             // Alors on récupère l'id auto-incrémenté généré par MySQL
             $this->id = $pdo->lastInsertId();
 
@@ -193,5 +195,4 @@ class Category extends CoreModel
         // Si on arrive ici, c'est que quelque chose n'a pas bien fonctionné => FAUX
         return false;
     }
-
 }

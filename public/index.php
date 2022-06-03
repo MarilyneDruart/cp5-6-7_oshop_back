@@ -23,7 +23,7 @@ $router = new AltoRouter();
 if (array_key_exists('BASE_URI', $_SERVER)) {
     // Alors on définit le basePath d'AltoRouter
     $router->setBasePath($_SERVER['BASE_URI']);
-    // ainsi, nos routes correspondront à l'URL, après la suite de sous-répertoire
+// ainsi, nos routes correspondront à l'URL, après la suite de sous-répertoire
 } else { // sinon
     // On donne une valeur par défaut à $_SERVER['BASE_URI'] car c'est utilisé dans le CoreController
     $_SERVER['BASE_URI'] = '/';
@@ -50,69 +50,71 @@ $router->map(
     'main-home'
 );
 
-// routes de catégories
+/**
+ * Catégories
+ */
 $router->map(
-    'GET', // La méthode HTTP autorisée pour cette route
-    '/category/category_list', // Partie de l'URL qui correspond à la page demandée (route)
+    'GET',
+    '/category/list',
     [
-        'method' => 'categoryList',
-        'controller' => '\App\Controllers\CategoryController' // On indique le FQCN de la classe
+        'method' => 'list',
+        'controller' => '\App\Controllers\CategoryController'
     ],
-    'category-list' // Identifiant unique de la route
+    'category-list'
 );
 
 $router->map(
-    'GET', // La méthode HTTP autorisée pour cette route
-    '/category/category_add', // Partie de l'URL qui correspond à la page demandée (route)
+    'GET',
+    '/category/add',
     [
-        'method' => 'categoryAdd',
-        'controller' => '\App\Controllers\CategoryController' // On indique le FQCN de la classe
+        'method' => 'add',
+        'controller' => '\App\Controllers\CategoryController'
     ],
-    'category-add' // Identifiant unique de la route
+    'category-add'
 );
 
 $router->map(
-    'POST', // La méthode HTTP autorisée pour cette route
-    '/category/category_add', // Partie de l'URL qui correspond à la page demandée (route)
+    'POST',
+    '/category/add',
     [
-        'method' => 'categoryCreate',
-        'controller' => '\App\Controllers\CategoryController' // On indique le FQCN de la classe
+        'method' => 'store',
+        'controller' => '\App\Controllers\CategoryController'
     ],
-    'category-create' // Identifiant unique de la route
+    'category-create'
 );
 
-// routes de produits
-
+/**
+ * Produits
+ */
 $router->map(
-    'GET', // La méthode HTTP autorisée pour cette route
-    '/products/products_list', // Partie de l'URL qui correspond à la page demandée (route)
+    'GET',
+    '/product/list',
     [
-        'method' => 'productsList',
-        'controller' => '\App\Controllers\ProductsController' // On indique le FQCN de la classe
+        'method' => 'list',
+        'controller' => '\App\Controllers\ProductController'
     ],
-    'products-list' // Identifiant unique de la route
-);
-
-$router->map(
-    'GET', // La méthode HTTP autorisée pour cette route
-    '/products/products_add', // Partie de l'URL qui correspond à la page demandée (route)
-    [
-        'method' => 'productsAdd',
-        'controller' => '\App\Controllers\ProductsController' // On indique le FQCN de la classe
-    ],
-    'products-add' // Identifiant unique de la route
+    'product-list'
 );
 
 $router->map(
-    'POST', // La méthode HTTP autorisée pour cette route
-    '/products/products_add', // Partie de l'URL qui correspond à la page demandée (route)
+    'GET',
+    '/product/add',
     [
-        'method' => 'productCreate',
-        'controller' => '\App\Controllers\ProductsController' // On indique le FQCN de la classe
+        'method' => 'add',
+        'controller' => '\App\Controllers\ProductController'
     ],
-    'products-create' // Identifiant unique de la route
+    'product-add'
 );
 
+$router->map(
+    'POST',
+    '/product/add',
+    [
+        'method' => 'store',
+        'controller' => '\App\Controllers\ProductController'
+    ],
+    'product-create'
+);
 
 /* -------------
 --- DISPATCH ---

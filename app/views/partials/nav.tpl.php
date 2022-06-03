@@ -1,7 +1,7 @@
-<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="<?= $router->generate('main-home') ?>">oShop</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
@@ -12,10 +12,10 @@
                         <a class="nav-link" href="<?= $router->generate('main-home') ?>">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= $router->generate('category-list') ?>">Catégories <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="<?= $router->generate('category-list') ?>">Catégories</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= $router->generate('products-list') ?>">Produits</a>
+                        <a class="nav-link" href="<?= $router->generate('product-list') ?>">Produits</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Types</a>
@@ -33,13 +33,3 @@
             </div>
         </div>
     </nav>
-<!-- <nav>
-    <ul>
-        <li><a href="<?= $router->generate('main-home') ?>">Accueil</a></li>
-        <li><a href="<?= $router->generate('category-list') ?>">Liste des catégories</a></li>
-        <li><a href="<?= $router->generate('category-add') ?>">Ajout de catégories</a></li>
-        <li><a href="<?= $router->generate('products-list') ?>">Liste des produits</a></li>
-        <li><a href="<?= $router->generate('products-add') ?>">Ajout de produits</a></li>
-        <li><a href="<?= md5(time()) ?>">404</a></li>
-    </ul>
-</nav> -->

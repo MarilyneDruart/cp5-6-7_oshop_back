@@ -55,14 +55,14 @@ class ProductsController extends CoreController {
             $brand = $_POST ['prodBrand'];
             $type = $_POST ['prodType'];
 
-            dump($name);
-            dump($description);
-            dump($picture);
-            dump($price);
-            dump($status);
-            dump($category);
-            dump($brand);
-            dump($type);
+            // dump($name);
+            // dump($description);
+            // dump($picture);
+            // dump($price);
+            // dump($status);
+            // dump($category);
+            // dump($brand);
+            // dump($type);
 
             // Pour insérer en DB, je crée d'abord une nouvelle instance du Model correspondant
             $post = new Product();
@@ -82,5 +82,6 @@ class ProductsController extends CoreController {
         }
 
     }
-    
+
+
 }
