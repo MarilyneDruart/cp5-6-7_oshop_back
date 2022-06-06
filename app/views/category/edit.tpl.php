@@ -1,7 +1,7 @@
 <a href="<?= $router->generate('category-list') ?>" class="btn btn-success float-end">Retour</a>
-<h2>Ajouter une catégorie</h2>
+<h2>Modifier une catégorie</h2>
 
-<form action="<?= $router->generate('category-create') ?>" method="POST" class="mt-5">
+<form action="" method="POST" class="mt-5">
     <?php include __DIR__ . '/../partials/errors.tpl.php'; ?>
     <div class="mb-3">
         <label for="name" class="form-label">Nom</label>
