@@ -31,5 +31,8 @@
                     </li>
                 </ul>
             </div>
+            <button class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#enroll" >           
+                        <a class="navbar-brand" href="<?= $router->generate('login') ?>">Connexion</a>
+            </button>
         </div>
     </nav>

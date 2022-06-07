@@ -156,6 +156,29 @@ $router->map(
     'product-update'
 );
 
+/**
+ * User
+ */
+$router->map(
+    'GET',
+    '/user/login',
+    [
+        'method' => 'login',
+        'controller' => '\App\Controllers\UserController'
+    ],
+    'login'
+);
+
+$router->map(
+    'POST',
+    '/user/login',
+    [
+        'method' => 'loginPost',
+        'controller' => '\App\Controllers\UserController'
+    ],
+    'login-post'
+);
+
 /* -------------
 --- DISPATCH ---
 --------------*/
