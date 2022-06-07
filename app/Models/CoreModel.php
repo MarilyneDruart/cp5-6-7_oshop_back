@@ -4,7 +4,7 @@ namespace App\Models;
 
 // Classe mère de tous les Models
 // On centralise ici toutes les propriétés et méthodes utiles pour TOUS les Models
-class CoreModel
+abstract class CoreModel
 {
     /**
      * @var int
@@ -49,4 +49,15 @@ class CoreModel
     {
         return $this->updated_at;
     }
+
+    public function save()
+    {
+        return $this->id ? $this->update() : $this->insert();
+    }
+
+    abstract public static function find($id);
+    abstract public static function findAll();
+    abstract public function insert();
+    abstract public function update();
+    abstract public function delete();
 }

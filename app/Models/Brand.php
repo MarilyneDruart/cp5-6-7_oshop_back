@@ -32,13 +32,13 @@ class Brand extends CoreModel
         $pdo = Database::getPDO();
 
         // écrire notre requête
-        $sql = '
-            SELECT *
-            FROM brand
-            WHERE id = ' . $brandId;
+        $sql = 'SELECT * FROM brand WHERE id = :id';
 
         // exécuter notre requête
-        $pdoStatement = $pdo->query($sql);
+        $pdoStatement = $pdo->prepare($sql);
+        $pdoStatement->execute([
+            ':id' => $brandId,
+        ]);
 
         // un seul résultat => fetchObject
         $brand = $pdoStatement->fetchObject('App\Models\Brand');

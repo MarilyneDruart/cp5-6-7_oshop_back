@@ -57,25 +57,23 @@ class Product extends CoreModel
      */
     public static function find($productId)
     {
-        // récupérer un objet PDO = connexion à la BDD
+        // se connecter à la BDD
         $pdo = Database::getPDO();
 
-        // on écrit la requête SQL pour récupérer le produit
-        $sql = '
-            SELECT *
-            FROM product
-            WHERE id = ' . $productId;
+        // écrire notre requête
+        $sql = 'SELECT * FROM product WHERE id = :id';
 
-        // query ? exec ?
-        // On fait de la LECTURE = une récupration => query()
-        // si on avait fait une modification, suppression, ou un ajout => exec
-        $pdoStatement = $pdo->query($sql);
+        // exécuter notre requête
+        $pdoStatement = $pdo->prepare($sql);
+        $pdoStatement->execute([
+            ':id' => $productId,
+        ]);
 
-        // fetchObject() pour récupérer un seul résultat
-        // si j'en avais eu plusieurs => fetchAll
-        $result = $pdoStatement->fetchObject('App\Models\Product');
+        // un seul résultat => fetchObject
+        $product = $pdoStatement->fetchObject('App\Models\Product');
 
-        return $result;
+        // retourner le résultat
+        return $product;
     }
 
     /**
@@ -145,6 +143,41 @@ class Product extends CoreModel
 
         // Si on arrive ici, c'est que quelque chose n'a pas bien fonctionné => FAUX
         return false;
+    }
+
+    public function update()
+    {
+        $pdo = Database::getPDO();
+
+        $sql = 'UPDATE product
+            SET name = :name,
+                description = :description,
+                picture = :picture,
+                price = :price,
+                rate = :rate,
+                status = :status,
+                category_id = :category_id,
+                brand_id = :brand_id,
+                type_id = :type_id
+            WHERE id = :id
+        ';
+
+        $query = $pdo->prepare($sql);
+
+        $success = $query->execute([
+            ':name' => $this->name,
+            ':description' => $this->description,
+            ':picture' => $this->picture,
+            ':price' => $this->price,
+            ':rate' => $this->rate,
+            ':status' => $this->status,
+            ':brand_id' => $this->brand_id,
+            ':category_id' => $this->category_id,
+            ':type_id' => $this->type_id,
+            ':id' => $this->id,
+        ]);
+
+        return $success;
     }
 
     /**
