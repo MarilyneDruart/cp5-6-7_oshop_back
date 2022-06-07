@@ -64,12 +64,62 @@ class Type extends CoreModel
 
     public function insert()
     {
+        $pdo = Database::getPDO();
 
+        // On formatte notre future requête SQL avec nos paramètres nommés
+        $sql = 'INSERT INTO `type` (name) VALUES (:name)';
+
+        // 1. On prépare notre requête
+        $query = $pdo->prepare($sql);
+
+        // 2. On exécute la requête SQL en lui transmettant des valeurs pour les paramètres nommés
+        // execute retourne true si tout s'est passé et false sinon
+        $success = $query->execute([
+            ':name' => $this->name,
+        ]);
+
+        if ($success) {
+            // Alors on récupère l'id auto-incrémenté généré par MySQL
+            $this->id = $pdo->lastInsertId();
+
+            // On retourne VRAI car l'ajout a parfaitement fonctionné
+            return true;
+            // => l'interpréteur PHP sort de cette fonction car on a retourné une donnée
+        }
+
+        // Si on arrive ici, c'est que quelque chose n'a pas bien fonctionné => FAUX
+        return false;
     }
 
     public function update()
     {
+        $pdo = Database::getPDO();
 
+        $sql = 'UPDATE `type` SET name = :name WHERE id = :id';
+
+        $query = $pdo->prepare($sql);
+
+        $success = $query->execute([
+            'name' => $this->name,
+            'id' => $this->id,
+        ]);
+
+        return $success;
+    }
+
+    public function delete()
+    {
+        $pdo = Database::getPDO();
+
+        $sql = 'DELETE FROM `type` WHERE id = :id';
+
+        $query = $pdo->prepare($sql);
+
+        $success = $query->execute([
+            'id' => $this->id,
+        ]);
+
+        return $success;
     }
 
     /**

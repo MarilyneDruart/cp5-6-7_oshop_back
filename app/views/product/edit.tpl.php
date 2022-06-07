@@ -1,4 +1,4 @@
-<a href="<?= $router->generate('product-list') ?>" class="btn btn-success float-end">Retour</a>
+        <a href="<?= $router->generate('product-list') ?>" class="btn btn-success float-end">Retour</a>
         <h2>Modifier le produit #<?= $product->getId() ?></h2>
 
         <form action="<?= $router->generate('product-update', ['id' => $product->getId()]) ?>" method="POST" class="mt-5">

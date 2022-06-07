@@ -180,6 +180,21 @@ class Product extends CoreModel
         return $success;
     }
 
+    public function delete()
+    {
+        $pdo = Database::getPDO();
+
+        $sql = 'DELETE FROM product WHERE id = :id';
+
+        $query = $pdo->prepare($sql);
+
+        $success = $query->execute([
+            'id' => $this->id,
+        ]);
+
+        return $success;
+    }
+
     /**
      * Get the value of name
      *
