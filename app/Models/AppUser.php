@@ -220,8 +220,24 @@ class AppUser extends CoreModel
         return $success;
     }
 
-    public function findByEmail($email)
+    public static function findByEmail($email)
     {
-        
+        // se connecter à la BDD
+        $pdo = Database::getPDO();
+
+        // écrire notre requête
+        $sql = 'SELECT * FROM app_user WHERE email = :email';
+
+        // exécuter notre requête
+        $pdoStatement = $pdo->prepare($sql);
+        $pdoStatement->execute([
+            ':email' => $email,
+        ]);
+
+        // un seul résultat => fetchObject
+        $appUserEmail = $pdoStatement->fetchObject('App\Models\AppUser');
+
+        // retourner le résultat
+        return $appUserEmail;
     }
 }
