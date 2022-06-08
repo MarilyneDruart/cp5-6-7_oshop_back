@@ -14,6 +14,8 @@ class ProductController extends CoreController
      */
     public function list()
     {
+        $this->checkAuthorization(['admin', 'catalog-manager']);
+
         $products = Product::findAll();
         $this->show('product/list', [
             'products' => $products,
@@ -25,6 +27,8 @@ class ProductController extends CoreController
      */
     public function add()
     {
+        $this->checkAuthorization(['admin', 'catalog-manager']);
+
         $categories = Category::findAll();
         $brands = Brand::findAll();
         $types = Type::findAll();
@@ -40,6 +44,8 @@ class ProductController extends CoreController
      */
     public function store($id = null)
     {
+        $this->checkAuthorization(['admin', 'catalog-manager']);
+
         $forUpdate = isset($id);
 
         extract($_POST, EXTR_SKIP);
@@ -131,6 +137,8 @@ class ProductController extends CoreController
 
     public function edit($id)
     {
+        $this->checkAuthorization(['admin', 'catalog-manager']);
+
         $product = Product::find($id);
 
         if (!$product) {

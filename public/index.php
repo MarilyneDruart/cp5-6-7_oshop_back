@@ -193,6 +193,36 @@ $router->map(
     'user-logout'
 );
 
+$router->map(
+    'GET',
+    '/user/list',
+    [
+        'method' => 'list',
+        'controller' => '\App\Controllers\UserController'
+    ],
+    'user-list'
+);
+
+$router->map(
+    'GET',
+    '/user/add',
+    [
+        'method' => 'add',
+        'controller' => '\App\Controllers\UserController'
+    ],
+    'user-add'
+);
+
+$router->map(
+    'POST',
+    '/user/add',
+    [
+        'method' => 'store',
+        'controller' => '\App\Controllers\UserController'
+    ],
+    'user-create'
+);
+
 
 /* -------------
 --- DISPATCH ---

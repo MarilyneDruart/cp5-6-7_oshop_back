@@ -29,6 +29,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Sélection Accueil</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= $router->generate('user-list') ?>">Utilisateurs</a>
+                    </li>
                 </ul>
             </div>
             <div>
