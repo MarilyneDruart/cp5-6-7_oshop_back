@@ -92,16 +92,13 @@ class UserController extends CoreController
 
         $errors = [];
 
-        $minuscule = preg_match('@[a-z]@', $password);
-        $majuscule = preg_match('@[A-Z]@', $password);
-	    $chiffre = preg_match('@[0-9]@', $password);
-        $caracSpe = preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*[0-9A-Za-z_\-\|\%\&\*\=\@\$]{8,}$/gm', $password);
+        $contentPassword = preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*[0-9A-Za-z_\-\|\%\&\*\=\@\$]{8,}$/gm', $password);
 
         if (!isset($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $errors[] = 'L\'adresse mail est invalide';
         }
 
-        if (!isset($password) || strlen($password) < 3 || $minuscule || !$majuscule || $chiffre || $caracSpe) {
+        if (!isset($password) || $contentPassword) {
             $errors[] = 'Le mot de passe est invalide';
         }
 
