@@ -11,6 +11,8 @@ class CategoryController extends CoreController
      */
     public function list()
     {
+        $this->checkAuthorization(['admin', 'catalog-manager']);
+
         // Appel statique à findAll()
         $categories = Category::findAll();
         $this->show('category/list', [
@@ -23,6 +25,8 @@ class CategoryController extends CoreController
      */
     public function add()
     {
+        $this->checkAuthorization(['admin', 'catalog-manager']);
+
         $this->show('category/add');
     }
 
@@ -31,6 +35,8 @@ class CategoryController extends CoreController
      */
     public function store($id = null)
     {
+        $this->checkAuthorization(['admin', 'catalog-manager']);
+
         $forUpdate = isset($id);
 
         extract($_POST, EXTR_SKIP);
@@ -94,6 +100,8 @@ class CategoryController extends CoreController
 
     public function edit($id)
     {
+        $this->checkAuthorization(['admin', 'catalog-manager']);
+
         $category = Category::find($id);
 
         if (!$category) {

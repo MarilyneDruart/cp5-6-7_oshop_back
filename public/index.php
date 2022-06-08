@@ -8,6 +8,10 @@
 // mais aussi d'activer le chargement automatique des classes (convention PSR-4)
 require_once '../vendor/autoload.php';
 
+// On démarre la session
+session_start();
+//var_dump($_SESSION);
+
 /* ------------
 --- ROUTAGE ---
 -------------*/
@@ -166,7 +170,7 @@ $router->map(
         'method' => 'login',
         'controller' => '\App\Controllers\UserController'
     ],
-    'login'
+    'user-login'
 );
 
 $router->map(
@@ -176,8 +180,19 @@ $router->map(
         'method' => 'loginPost',
         'controller' => '\App\Controllers\UserController'
     ],
-    'login-post'
+    'user-login-post'
 );
+
+$router->map(
+    'GET',
+    '/user/logout',
+    [
+        'method' => 'logout',
+        'controller' => '\App\Controllers\UserController'
+    ],
+    'user-logout'
+);
+
 
 /* -------------
 --- DISPATCH ---
