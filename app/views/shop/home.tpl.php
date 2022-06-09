@@ -10,6 +10,7 @@
                 <label for="emplacement1">Emplacement #1</label>
                 <select class="form-control" id="emplacement1" name="emplacement[]">
 
+<!-- Si je modifie la catéggorie sur le formulaire, le home_order devra être modifié en conséquence -->
                     <?php foreach ($categories as $key => $category) : ?>
 
                         <?php if ($key === 0) : ?>
