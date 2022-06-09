@@ -35,7 +35,37 @@ abstract class CoreController
         if (array_key_exists($route_name, $acl)) {
             $this->checkAuthorization($acl[$route_name]);
         }
+
+        // Protection CSRF
+        if (!isset($_SESSION['_token'])) {
+            $_SESSION['_token'] = $this->generateCSRFToken();
+        }
+
+        // si requete de type POST
+        if($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // vérification du token CSRF, si pas de loken > page 403
+            if (!$this->checkCSRFToken()) {
+                http_response_code(403);
+                $this->show('error/err403');
+                die;
+            }
+
+        }
     }
+
+    protected function generateCSRFToken()
+    {
+        // binaire to heximal (chaine de caractères aléatoire de 32 octets soit 64 caracs (1 octet = 2 caracs))
+        return bin2hex(random_bytes(32));
+    }
+
+    // vérifie si le formulaire a bien un token
+    protected function checkCSRFToken()
+    {
+        return isset($_POST['_token']) && $_POST['_token'] === $_SESSION['_token'];
+    }
+
+    
     /**
      * Méthode permettant d'afficher du code HTML en se basant sur les views
      *

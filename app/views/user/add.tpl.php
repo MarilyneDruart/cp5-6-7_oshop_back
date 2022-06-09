@@ -4,6 +4,8 @@
 
         <form action="<?= $router->generate('user-create') ?>" method="POST" class="mt-5">
             <?php include __DIR__ . '/../partials/errors.tpl.php'; ?>
+            <?php require __DIR__ . '/../partials/csrf_input.tpl.php'; ?>
+            <input type="hidden" name="_token" value="<?= $_SESSION['_token'] ?>">
             <div class="mb-3">
                 <label for="email" class="form-label">Email*</label>
                 <input type="email" class="form-control" id="email" name="email" value="<?= $_POST['email'] ?? '' ?>" placeholder="Adresse mail">

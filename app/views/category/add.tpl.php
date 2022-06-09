@@ -3,6 +3,7 @@
 
         <form action="<?= $router->generate('category-create') ?>" method="POST" class="mt-5">
             <?php include __DIR__ . '/../partials/errors.tpl.php'; ?>
+            <?php require __DIR__ . '/../partials/csrf_input.tpl.php'; ?>
             <div class="mb-3">
                 <label for="name" class="form-label">Nom</label>
                 <input type="text" class="form-control" id="name" name="name" value="<?= $_POST['name'] ?? '' ?>" placeholder="Nom de la catégorie">
