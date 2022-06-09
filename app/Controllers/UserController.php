@@ -43,7 +43,7 @@ class UserController extends CoreController
      */
     public function logout()
     {
-        $this->checkAuthorization(['admin', 'catalog-manager']);
+        //$this->checkAuthorization(['admin', 'catalog-manager']); remplacé dans CoreController
 
         global $router;
 
@@ -60,7 +60,7 @@ class UserController extends CoreController
      */
     public function list()
     {
-        $this->checkAuthorization(['admin']);
+        //$this->checkAuthorization(['admin']); remplacé dans CoreController
 
         // Appel statique à findAll()
         $users = AppUser::findAll();
@@ -74,7 +74,7 @@ class UserController extends CoreController
      */
     public function add()
     {
-        $this->checkAuthorization(['admin']);
+        //$this->checkAuthorization(['admin']); remplacé dans CoreController
 
         $this->show('user/add');
     }
@@ -84,7 +84,7 @@ class UserController extends CoreController
      */
     public function store($id = null)
     {
-        $this->checkAuthorization(['admin']);
+        //$this->checkAuthorization(['admin']); remplacé dans CoreController
 
         $forUpdate = isset($id);
 

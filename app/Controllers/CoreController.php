@@ -4,6 +4,38 @@ namespace App\Controllers;
 
 abstract class CoreController
 {
+    public function __construct()
+    {
+        // On doit récupérer la route qui a "matchée" avec la requête de mon visiteur
+        // acl (Access Control List) permet de voir toutes les autorisations d'un coup
+        global $match;
+
+        $route_name = $match['name'] ?? null;
+
+        $acl = [
+            'main-home' => ['admin', 'catalog-manager'],
+
+            'user-list' => ['admin'],
+            'user-add' => ['admin'],
+            'user-create' => ['admin'],
+
+            'product-list' => ['admin', 'catalog-manager'],
+            'product-add' => ['admin', 'catalog-manager'],
+            'product-create' => ['admin', 'catalog-manager'],
+            'product-edit' => ['admin', 'catalog-manager'],
+            'product-update' => ['admin', 'catalog-manager'],
+
+            'category-list' => ['admin', 'catalog-manager'],
+            'category-add' => ['admin', 'catalog-manager'],
+            'category-create' => ['admin', 'catalog-manager'],
+            'category-edit' => ['admin', 'catalog-manager'],
+            'category-update' => ['admin', 'catalog-manager'],
+        ];
+
+        if (array_key_exists($route_name, $acl)) {
+            $this->checkAuthorization($acl[$route_name]);
+        }
+    }
     /**
      * Méthode permettant d'afficher du code HTML en se basant sur les views
      *
