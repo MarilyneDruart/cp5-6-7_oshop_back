@@ -28,4 +28,26 @@ class MainController extends CoreController
             'products' => $products,
         ]);
     }
+
+    public function shopHome()
+    {        
+        $this->show('/shop/home');
+    }
+
+    public function shopHomeEdit()
+    {
+
+        $categories = Category::findAllHomepage();
+
+        if (!$categories) {
+            $error = new ErrorController();
+            $error->err404();
+            return;
+        }
+
+        
+        $this->show('/shop/home', [
+            'categories' => $categories,
+        ]);
+    }
 }
