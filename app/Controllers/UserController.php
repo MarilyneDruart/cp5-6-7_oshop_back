@@ -102,12 +102,14 @@ class UserController extends CoreController
             $errors[] = 'Le mot de passe est invalide';
         }
 
-        if (!isset($lastname) || !is_string($lastname) || strlen($lastname) < 3) {
-            $errors[] = 'Le prénom est invalide';
+        // optionnel
+        if (!isset($firstname) && !empty($firstname) && (!is_string($firstname) || strlen($firstname) < 3)) {
+            $errors[] = 'Le nom est invalide';
         }
 
-        if (!isset($firstname) || !is_string($firstname) || strlen($firstname) < 3) {
-            $errors[] = 'Le nom est invalide';
+        // optionnel
+        if (!isset($lastname) && !empty($lastname) && (!is_string($lastname) || strlen($lastname) < 3)) {
+            $errors[] = 'Le prénom est invalide';
         }
 
         if (!isset($role) || !in_array($role, ['catalog-manager', 'admin'])) {
@@ -128,12 +130,12 @@ class UserController extends CoreController
             $user = $forUpdate ? AppUser::find($id) : new AppUser();
 
             // On fixe des valeurs pour nos propriétés
-            $user->setEmail(htmlspecialchars($email));
+            $user->setEmail($email);
             $user->setPassword(password_hash($password, PASSWORD_DEFAULT));
-            $user->setLastname(isset($lastname) ? htmlspecialchars($lastname) : null);
-            $user->setFirstname(isset($firstname) ? htmlspecialchars($firstname) : null);
-            $user->setRole(isset($role) ? htmlspecialchars($role) : null);
-            $user->setStatus(isset($status) ? htmlspecialchars($status) : null);
+            $user->setFirstname((isset($firstname) && !empty($firstname)) ? htmlspecialchars($firstname) : null);
+            $user->setLastname((isset($lastname) && !empty($lastname)) ? htmlspecialchars($lastname) : null);
+            $user->setRole($role);
+            $user->setStatus($status);
 
             // On teste si l'insertion dans la table s'est bien passée
             if ($user->save()) {
