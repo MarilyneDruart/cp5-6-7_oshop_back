@@ -1,4 +1,4 @@
-        <a href="<?= $router->generate('product-list') ?>" class="btn btn-success float-end">Retour</a>
+<a href="<?= $router->generate('product-list') ?>" class="btn btn-success float-end">Retour</a>
         <h2>Modifier le produit #<?= $product->getId() ?></h2>
 
         <form action="<?= $router->generate('product-update', ['id' => $product->getId()]) ?>" method="POST" class="mt-5">
@@ -83,3 +83,25 @@
                 <button type="submit" class="btn btn-primary mt-5">Valider</button>
             </div>
         </form>
+
+        <form action="" method="POST" class="mt-5">
+            <?php require __DIR__ . '/../partials/csrf_input.tpl.php'; ?>
+            <div>
+                <label for="tag_id">Ajouter un tag</label>
+                <select class="form-select mt-2" id="tag_id" name="tag_id">
+                    <option value="">--</option>
+                    <?php foreach ($tags as $tag) : ?>
+                    <option value="<?= $tag->getId() ?>"><?= $tag->getName() ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="mt-3">
+                <input type="submit" class="btn btn-primary" value="Ajouter">
+            </div>
+        </form>
+
+        <div class="mt-4">
+            <?php foreach ($product_tags as $product_tag) : ?>
+            <span class="badge bg-dark"><?= $product_tag->getName() ?></span>
+            <?php endforeach; ?>
+        </div>
