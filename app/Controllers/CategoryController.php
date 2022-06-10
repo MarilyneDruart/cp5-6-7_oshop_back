@@ -114,4 +114,52 @@ class CategoryController extends CoreController
             'category' => $category,
         ]);
     }
+
+
+    public function shopHome()
+    {        
+        $this->show('/shop/home');
+    }
+
+    public function homeSelection()
+    {
+        $categories = Category::findAll();
+
+        $this->show('category/home-selection', [
+            'categories' => $categories,
+        ]);
+    }
+
+
+    public function homeSelectionPost()
+    {
+        extract($_POST, EXTR_SKIP);
+
+        $errors = [];
+
+        if (!isset($emplacement) || count($emplacement) !== 5) {
+            $errors[] = 'Les 5 emplacements sont obligatoires';
+        } elseif (in_array('', $emplacement)) {
+            $errors[] = 'Les 5 emplacements doivent avoir une catégorie';
+        } elseif (count($emplacement) !== count(array_unique($emplacement))) {
+            $errors[] = 'Les 5 emplacements doivent avoir une catégorie différente';
+        }
+
+        if (!$errors) {
+            $success = Category::setHomeSelection($emplacement);
+            if ($success) {
+                global $router;
+                header('Location: ' . $router->generate('category-home-selection'));
+                return;
+            }
+        }
+
+        $categories = Category::findAll();
+
+        $this->show('category/home-selection', [
+            'categories' => $categories,
+            'errors' => $errors,
+        ]);
+    }
+
 }

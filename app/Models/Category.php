@@ -204,7 +204,7 @@ class Category extends CoreModel
         $pdo = Database::getPDO();
 
         $sql = 'UPDATE category
-            SET name = :name, subtitle = :subtitle, picture = :picture
+            SET name = :name, subtitle = :subtitle, picture = :picture, home_order = :home_order
             WHERE id = :id
         ';
 
@@ -214,7 +214,9 @@ class Category extends CoreModel
             'name' => $this->name,
             'subtitle' => $this->subtitle,
             'picture' => $this->picture,
+            'home_order' => $this->home_order,
             'id' => $this->id,
+            
         ]);
 
         return $success;
@@ -233,5 +235,51 @@ class Category extends CoreModel
         ]);
 
         return $success;
+    }
+
+    // méthode static car on l'appelle de façon statique dans le controller pour éviter de faire une instanciation
+
+    public static function setHomeSelection($emplacements)
+    {
+        $pdo = Database::getPDO();
+
+        foreach ($emplacements as $key => $categoryId) {
+            $category = Category::find($categoryId);
+            // Si la catégorie renseignée dans le formulaire existe
+            if ($category) {
+                // Je sélectionne l'ancienne catégorie
+                $old = Category::findByHomeOrder($key + 1);
+
+                if ($old) {
+                    // Je fixe son home_order à 0
+                    $old->setHomeOrder(0);
+                    $old->save();
+                }
+                // Et une nouvelle catégorie prend sa place pour le home_order
+                $category->setHomeOrder($key + 1);
+                $category->save();
+            } else {
+                // On retourne false si une des catégories n'existe pas
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public static function findByHomeOrder($home_order)
+    {
+        $pdo = Database::getPDO();
+
+        $sql = 'SELECT * FROM category WHERE home_order = :home_order';
+
+        $pdoStatement = $pdo->prepare($sql);
+        $pdoStatement->execute([
+            'home_order' => $home_order,
+        ]);
+
+        $category = $pdoStatement->fetchObject('App\Models\Category');
+
+        return $category;
     }
 }
