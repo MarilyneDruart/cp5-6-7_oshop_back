@@ -18,6 +18,8 @@ abstract class CoreController
             'user-list' => ['admin'],
             'user-add' => ['admin'],
             'user-create' => ['admin'],
+            'user-edit' => ['admin'],
+            'user-update' => ['admin'],
 
             'product-list' => ['admin', 'catalog-manager'],
             'product-add' => ['admin', 'catalog-manager'],

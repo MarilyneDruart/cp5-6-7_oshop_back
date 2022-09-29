@@ -246,6 +246,26 @@ $router->map(
     'user-create'
 );
 
+$router->map(
+    'GET',
+    '/user/[i:id]/edit',
+    [
+        'method' => 'edit',
+        'controller' => '\App\Controllers\UserController'
+    ],
+    'user-edit'
+);
+
+$router->map(
+    'POST',
+    '/user/[i:id]/edit',
+    [
+        'method' => 'store',
+        'controller' => '\App\Controllers\UserController'
+    ],
+    'user-update'
+);
+
 
 
 /* -------------
