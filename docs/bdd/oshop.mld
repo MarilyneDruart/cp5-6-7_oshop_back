@@ -1,0 +1,25 @@
+%%mocodo
+:::::
+TAG: tag_id, tag name
+:::::
+
+
+:::::
+product_has_tag: #tag_id->TAG->tag_id, _#product_id->PRODUCT->product_id
+:::::
+
+
+:
+BRAND: brand_id, brand name
+:::
+PRODUCT: product_id, product name, description, picture, price, rate, status, #brand_id->BRAND->brand_id, #category_id->CATEGORY->category_id, #type_id->TYPE->type_id
+:::
+CATEGORY: category_id, category name, subtitle, picture, home order
+:
+
+
+:::
+TYPE: type_id, type name
+:::
+APP_USER: user_id, email, password, firstname, lastname, role, status
+:::

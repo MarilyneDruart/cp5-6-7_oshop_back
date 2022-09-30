@@ -1,0 +1,7 @@
+APP_USER (_user_id_, email, password, firstname, lastname, role, status)
+BRAND (_brand_id_, brand name)
+CATEGORY (_category_id_, category name, subtitle, picture, home order)
+PRODUCT (_product_id_, product name, description, picture, price, rate, status, #brand_id, #category_id, #type_id)
+TAG (_tag_id_, tag name)
+TYPE (_type_id_, type name)
+product_has_tag (_#tag_id_, _#product_id_)
