@@ -62,28 +62,23 @@ class Brand extends CoreModel
         return $results;
     }
 
-    /**
-     * Méthode permettant d'ajouter un enregistrement dans la table brand
-     * L'objet courant doit contenir toutes les données à ajouter : 1 propriété => 1 colonne dans la table
-     *
-     * @return bool
-     */
     public function insert()
     {
-        // Récupération de l'objet PDO représentant la connexion à la DB
         $pdo = Database::getPDO();
 
-        // Ecriture de la requête INSERT INTO
-        $sql = "
-            INSERT INTO `brand` (name)
-            VALUES ('{$this->name}')
-        ";
+        // On formatte notre future requête SQL avec nos paramètres nommés
+        $sql = 'INSERT INTO brand (name) VALUES (:name)';
 
-        // Execution de la requête d'insertion (exec, pas query)
-        $insertedRows = $pdo->exec($sql);
+        // 1. On prépare notre requête
+        $query = $pdo->prepare($sql);
 
-        // Si au moins une ligne ajoutée
-        if ($insertedRows > 0) {
+        // 2. On exécute la requête SQL en lui transmettant des valeurs pour les paramètres nommés
+        // execute retourne true si tout s'est passé et false sinon
+        $success = $query->execute([
+            ':name' => $this->name,
+        ]);
+
+        if ($success) {
             // Alors on récupère l'id auto-incrémenté généré par MySQL
             $this->id = $pdo->lastInsertId();
 
@@ -96,31 +91,35 @@ class Brand extends CoreModel
         return false;
     }
 
-    /**
-     * Méthode permettant de mettre à jour un enregistrement dans la table brand
-     * L'objet courant doit contenir l'id, et toutes les données à ajouter : 1 propriété => 1 colonne dans la table
-     *
-     * @return bool
-     */
     public function update()
     {
-        // Récupération de l'objet PDO représentant la connexion à la DB
         $pdo = Database::getPDO();
 
-        // Ecriture de la requête UPDATE
-        $sql = "
-            UPDATE `brand`
-            SET
-                name = '{$this->name}',
-                updated_at = NOW()
-            WHERE id = {$this->id}
-        ";
+        $sql = 'UPDATE brand SET name = :name WHERE id = :id';
 
-        // Execution de la requête de mise à jour (exec, pas query)
-        $updatedRows = $pdo->exec($sql);
+        $query = $pdo->prepare($sql);
 
-        // On retourne VRAI, si au moins une ligne ajoutée
-        return ($updatedRows > 0);
+        $success = $query->execute([
+            'name' => $this->name,
+            'id' => $this->id,
+        ]);
+
+        return $success;
+    }
+
+    public function delete()
+    {
+        $pdo = Database::getPDO();
+
+        $sql = 'DELETE FROM brand WHERE id = :id';
+
+        $query = $pdo->prepare($sql);
+
+        $success = $query->execute([
+            'id' => $this->id,
+        ]);
+
+        return $success;
     }
 
     /**

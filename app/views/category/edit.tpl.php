@@ -1,4 +1,4 @@
-<a href="<?= $router->generate('category-list') ?>" class="btn btn-success float-end">Retour</a>
+        <a href="<?= $router->generate('category-list') ?>" class="btn btn-success float-end">Retour</a>
         <h2>Modifier la catégorie #<?= $category->getId() ?></h2>
 
         <form action="<?= $router->generate('category-update', ['id' => $category->getId()]) ?>" method="POST" class="mt-5">

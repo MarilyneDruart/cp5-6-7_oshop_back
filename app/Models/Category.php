@@ -219,4 +219,19 @@ class Category extends CoreModel
 
         return $success;
     }
+
+    public function delete()
+    {
+        $pdo = Database::getPDO();
+
+        $sql = 'DELETE FROM category WHERE id = :id';
+
+        $query = $pdo->prepare($sql);
+
+        $success = $query->execute([
+            'id' => $this->id,
+        ]);
+
+        return $success;
+    }
 }
