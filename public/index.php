@@ -83,6 +83,28 @@ $router->map(
     'category-create'
 );
 
+$router->map(
+    'GET',
+    '/category/[i:id]/edit',
+    [
+        'method' => 'edit',
+        'controller' => '\App\Controllers\CategoryController'
+    ],
+    'category-edit'
+);
+
+$router->map(
+    'POST',
+    '/category/[i:id]/edit',
+    [
+        'method' => 'update',
+        'controller' => '\App\Controllers\CategoryController'
+    ],
+    'category-update'
+);
+
+
+
 /**
  * Produits
  */

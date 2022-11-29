@@ -16,7 +16,9 @@
                     <td><?= $category->getName() ?></td>
                     <td><?= $category->getSubtitle() ?></td>
                     <td class="text-end">
-                        <a href="" class="btn btn-sm btn-warning">
+                        <!-- lorsque je clique sur le bouton je veux être redirigée vers la page edit sur la catégorie cliquée, je dois donc récupérer l'id de la catégorie en question et l'insérer dans ma redirection (à modifier dans CategoryController    '/category/'.$category->getId().'/edit'    -->
+                        <a href="<?= $router->generate('category-edit', ['id' => $category->getId()]) ?>" class="btn btn-sm btn-warning">
+
                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                         </a>
                         <!-- Example single danger button -->
