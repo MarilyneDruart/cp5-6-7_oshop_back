@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Tag;
 use App\Models\Type;
 
 class ProductController extends CoreController
@@ -14,8 +15,6 @@ class ProductController extends CoreController
      */
     public function list()
     {
-        //$this->checkAuthorization(['admin', 'catalog-manager']); remplacé dans CoreController
-
         $products = Product::findAll();
         $this->show('product/list', [
             'products' => $products,
@@ -27,8 +26,6 @@ class ProductController extends CoreController
      */
     public function add()
     {
-        //$this->checkAuthorization(['admin', 'catalog-manager']); remplacé dans CoreController
-
         $categories = Category::findAll();
         $brands = Brand::findAll();
         $types = Type::findAll();
@@ -44,8 +41,6 @@ class ProductController extends CoreController
      */
     public function store($id = null)
     {
-        //$this->checkAuthorization(['admin', 'catalog-manager']); remplacé dans CoreController
-
         $forUpdate = isset($id);
 
         extract($_POST, EXTR_SKIP);
@@ -118,12 +113,17 @@ class ProductController extends CoreController
         $types = Type::findAll();
 
         if ($forUpdate) {
+            $tags = Tag::findAll();
+            $product_tags = Tag::findAllByProductId($id);
+
             $this->show('product/edit', [
                 'errors' => $errors,
                 'categories' => $categories,
                 'brands' => $brands,
                 'types' => $types,
                 'product' => Product::find($id),
+                'tags' => $tags,
+                'product_tags' => $product_tags,
             ]);
         } else {
             $this->show('product/add', [
@@ -137,8 +137,6 @@ class ProductController extends CoreController
 
     public function edit($id)
     {
-        //$this->checkAuthorization(['admin', 'catalog-manager']); remplacé dans CoreController
-
         $product = Product::find($id);
 
         if (!$product) {
@@ -150,12 +148,16 @@ class ProductController extends CoreController
         $categories = Category::findAll();
         $brands = Brand::findAll();
         $types = Type::findAll();
+        $tags = Tag::findAll();
+        $product_tags = Tag::findAllByProductId($id);
 
         $this->show('product/edit', [
             'product' => $product,
             'categories' => $categories,
             'brands' => $brands,
             'types' => $types,
+            'tags' => $tags,
+            'product_tags' => $product_tags,
         ]);
     }
 }

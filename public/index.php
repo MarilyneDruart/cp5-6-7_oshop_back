@@ -108,6 +108,29 @@ $router->map(
 );
 
 /**
+ * Accueil
+ */
+$router->map(
+    'GET',
+    '/category/home-selection',
+    [
+        'method' => 'homeSelection',
+        'controller' => '\App\Controllers\CategoryController'
+    ],
+    'category-home-selection'
+);
+
+$router->map(
+    'POST',
+    '/category/home-selection',
+    [
+        'method' => 'homeSelectionPost',
+        'controller' => '\App\Controllers\CategoryController'
+    ],
+    'category-home-selection-post'
+);
+
+/**
  * Produits
  */
 $router->map(
@@ -223,28 +246,6 @@ $router->map(
     'user-create'
 );
 
-/**
- * Accueil
- */
-$router->map(
-    'GET',
-    '/shop/home',
-    [
-        'method' => 'shopHome',
-        'controller' => '\App\Controllers\MainController'
-    ],
-    'shop-home'
-);
-
-$router->map(
-    'POST',
-    '/shop/home',
-    [
-        'method' => 'shopHomeEdit',
-        'controller' => '\App\Controllers\MainController'
-    ],
-    'shop-home-edit'
-);
 
 
 /* -------------

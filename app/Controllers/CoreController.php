@@ -30,9 +30,8 @@ abstract class CoreController
             'category-create' => ['admin', 'catalog-manager'],
             'category-edit' => ['admin', 'catalog-manager'],
             'category-update' => ['admin', 'catalog-manager'],
+            'category-home-selection' => ['admin', 'catalog-manager'],
 
-            'shop-home' => ['admin', 'catalog-manager'],
-            'shop-home-edit' => ['admin', 'catalog-manager'],
         ];
 
         if (array_key_exists($route_name, $acl)) {
@@ -130,4 +129,5 @@ abstract class CoreController
         header('Location: ' . $router->generate('user-login'));
         die;
     }
+    
 }

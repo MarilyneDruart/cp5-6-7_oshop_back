@@ -9,7 +9,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= $router->generate('shop-home') ?>">Accueil</a>
+                        <a class="nav-link" href="<?= $router->generate('main-home') ?>">Accueil</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?= $router->generate('category-list') ?>">Catégories</a>
@@ -27,7 +27,7 @@
                         <a class="nav-link" href="#">Tags</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Sélection Accueil</a>
+                        <a class="nav-link" href="<?= $router->generate('category-home-selection') ?>">Sélection Accueil</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?= $router->generate('user-list') ?>">Utilisateurs</a>
