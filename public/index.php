@@ -223,6 +223,29 @@ $router->map(
     'user-create'
 );
 
+/**
+ * Accueil
+ */
+$router->map(
+    'GET',
+    '/shop/home',
+    [
+        'method' => 'shopHome',
+        'controller' => '\App\Controllers\MainController'
+    ],
+    'shop-home'
+);
+
+$router->map(
+    'POST',
+    '/shop/home',
+    [
+        'method' => 'shopHomeEdit',
+        'controller' => '\App\Controllers\MainController'
+    ],
+    'shop-home-edit'
+);
+
 
 /* -------------
 --- DISPATCH ---

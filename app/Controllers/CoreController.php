@@ -30,6 +30,9 @@ abstract class CoreController
             'category-create' => ['admin', 'catalog-manager'],
             'category-edit' => ['admin', 'catalog-manager'],
             'category-update' => ['admin', 'catalog-manager'],
+
+            'shop-home' => ['admin', 'catalog-manager'],
+            'shop-home-edit' => ['admin', 'catalog-manager'],
         ];
 
         if (array_key_exists($route_name, $acl)) {
@@ -43,7 +46,7 @@ abstract class CoreController
 
         // si requete de type POST
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // vérification du token CSRF, si pas de loken > page 403
+            // vérification du token CSRF, si pas de token > page 403
             if (!$this->checkCSRFToken()) {
                 http_response_code(403);
                 $this->show('error/err403');
