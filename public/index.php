@@ -71,6 +71,16 @@ $router->map(
     'category-add' // Identifiant unique de la route
 );
 
+$router->map(
+    'POST', // La méthode HTTP autorisée pour cette route
+    '/category/category_add', // Partie de l'URL qui correspond à la page demandée (route)
+    [
+        'method' => 'categoryCreate',
+        'controller' => '\App\Controllers\CategoryController' // On indique le FQCN de la classe
+    ],
+    'category-create' // Identifiant unique de la route
+);
+
 // routes de produits
 
 $router->map(
@@ -93,6 +103,15 @@ $router->map(
     'products-add' // Identifiant unique de la route
 );
 
+$router->map(
+    'POST', // La méthode HTTP autorisée pour cette route
+    '/products/products_add', // Partie de l'URL qui correspond à la page demandée (route)
+    [
+        'method' => 'productCreate',
+        'controller' => '\App\Controllers\ProductsController' // On indique le FQCN de la classe
+    ],
+    'products-create' // Identifiant unique de la route
+);
 
 
 /* -------------
