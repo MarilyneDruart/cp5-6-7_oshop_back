@@ -1,0 +1,39 @@
+{
+  "width": 552,
+  "height": 473,
+  "cx": [
+    [ "TAG", 255 ],
+    [ "product_has_tag", 255 ],
+    [ "BRAND", 51 ],
+    [ "made", 150 ],
+    [ "PRODUCT", 255 ],
+    [ "related to", 372 ],
+    [ "CATEGORY", 492 ],
+    [ "TYPE", 150 ],
+    [ "is a", 255 ],
+    [ "APP_USER", 372 ]
+  ],
+  "cy": [
+    [ "TAG", 43 ],
+    [ "product_has_tag", 127 ],
+    [ "BRAND", 253 ],
+    [ "made", 253 ],
+    [ "PRODUCT", 253 ],
+    [ "related to", 253 ],
+    [ "CATEGORY", 253 ],
+    [ "TYPE", 388 ],
+    [ "is a", 388 ],
+    [ "APP_USER", 388 ]
+  ],
+  "shift": [
+    [ "product_has_tag,TAG,0", 0 ],
+    [ "product_has_tag,PRODUCT,0", 0 ],
+    [ "made,BRAND,0", 0 ],
+    [ "made,PRODUCT,0", 0 ],
+    [ "related to,PRODUCT,0", 0 ],
+    [ "related to,CATEGORY,0", 0 ],
+    [ "is a,TYPE,0", 0 ],
+    [ "is a,PRODUCT,0", 0 ]
+  ],
+  "ratio": []
+}

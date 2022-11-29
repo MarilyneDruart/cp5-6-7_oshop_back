@@ -1,0 +1,22 @@
+% Copy this before \begin{document}
+
+\usepackage[normalem]{ulem}
+\newenvironment{mld}
+  {\par\begin{minipage}{\linewidth}\begin{tabular}{rp{0.7\linewidth}}}
+  {\end{tabular}\end{minipage}\par}
+\newcommand{\relat}[1]{\textsc{#1}}
+\newcommand{\attr}[1]{\emph{#1}}
+\newcommand{\prim}[1]{\uline{#1}}
+\newcommand{\foreign}[1]{\#\textsl{#1}}
+
+% Copy that after \begin{document}
+
+\begin{mld}
+  App\_user & (\prim{user\_id}, \attr{email}, \attr{password}, \attr{firstname}, \attr{lastname}, \attr{role}, \attr{status})\\
+  Brand & (\prim{brand\_id}, \attr{brand name})\\
+  Category & (\prim{category\_id}, \attr{category name}, \attr{subtitle}, \attr{picture}, \attr{home order})\\
+  Product & (\prim{product\_id}, \attr{product name}, \attr{description}, \attr{picture}, \attr{price}, \attr{rate}, \attr{status}, \foreign{brand\_id}, \foreign{category\_id}, \foreign{type\_id})\\
+  Tag & (\prim{tag\_id}, \attr{tag name})\\
+  Type & (\prim{type\_id}, \attr{type name})\\
+  Product\_has\_tag & (\foreign{\prim{tag\_id}}, \foreign{\prim{product\_id}})\\
+\end{mld}
