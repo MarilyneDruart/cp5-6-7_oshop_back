@@ -1,0 +1,114 @@
+<html>
+<head>
+<meta charset='utf-8'>
+<style>
+  #mld .relation { font-variant: small-caps; font-weight: bold }
+  #mld .primary { text-decoration: underline }
+  #mld .foreign { font-style: oblique }
+  #mld .normal { }
+  #mld strong { font-weight: bold }
+  #mld i { font-style: italic }
+  #mld ul { list-style-type:square; margin: 0 0 1em 2em }
+</style>
+</head>
+<body>
+<div id='mld'>
+<div>
+  <details><summary><span class='relation'>APP_USER</span> (
+    <span title='primary_key (None)' class='primary'>user_id</span>,
+    <span title='normal_attribute (None)' class='normal'>email</span>,
+    <span title='normal_attribute (None)' class='normal'>password</span>,
+    <span title='normal_attribute (None)' class='normal'>firstname</span>,
+    <span title='normal_attribute (None)' class='normal'>lastname</span>,
+    <span title='normal_attribute (None)' class='normal'>role</span>,
+    <span title='normal_attribute (None)' class='normal'>status</span>
+  )</summary>
+  <ul>
+    <li>Le champ <i>user_id</i> constitue la clé primaire de la table. C'était déjà un identifiant de l'entité <i>APP_USER</i>.</li>
+    <li>Les champs <i>email</i>, <i>password</i>, <i>firstname</i>, <i>lastname</i>, <i>role</i> et <i>status</i> étaient déjà de simples attributs de l'entité <i>APP_USER</i>.</li>
+  </ul></details>
+</div>
+
+<div>
+  <details><summary><span class='relation'>BRAND</span> (
+    <span title='primary_key (None)' class='primary'>brand_id</span>,
+    <span title='normal_attribute (None)' class='normal'>brand name</span>
+  )</summary>
+  <ul>
+    <li>Le champ <i>brand_id</i> constitue la clé primaire de la table. C'était déjà un identifiant de l'entité <i>BRAND</i>.</li>
+    <li>Le champ <i>brand name</i> était déjà un simple attribut de l'entité <i>BRAND</i>.</li>
+  </ul></details>
+</div>
+
+<div>
+  <details><summary><span class='relation'>CATEGORY</span> (
+    <span title='primary_key (None)' class='primary'>category_id</span>,
+    <span title='normal_attribute (None)' class='normal'>category name</span>,
+    <span title='normal_attribute (None)' class='normal'>subtitle</span>,
+    <span title='normal_attribute (None)' class='normal'>picture</span>,
+    <span title='normal_attribute (None)' class='normal'>home order</span>
+  )</summary>
+  <ul>
+    <li>Le champ <i>category_id</i> constitue la clé primaire de la table. C'était déjà un identifiant de l'entité <i>CATEGORY</i>.</li>
+    <li>Les champs <i>category name</i>, <i>subtitle</i>, <i>picture</i> et <i>home order</i> étaient déjà de simples attributs de l'entité <i>CATEGORY</i>.</li>
+  </ul></details>
+</div>
+
+<div>
+  <details><summary><span class='relation'>PRODUCT</span> (
+    <span title='primary_key (None)' class='primary'>product_id</span>,
+    <span title='normal_attribute (None)' class='normal'>product name</span>,
+    <span title='normal_attribute (None)' class='normal'>description</span>,
+    <span title='normal_attribute (None)' class='normal'>picture</span>,
+    <span title='normal_attribute (None)' class='normal'>price</span>,
+    <span title='normal_attribute (None)' class='normal'>rate</span>,
+    <span title='normal_attribute (None)' class='normal'>status</span>,
+    <span title='foreign_key (BRAND)' class='foreign'>#brand_id</span>,
+    <span title='foreign_key (CATEGORY)' class='foreign'>#category_id</span>,
+    <span title='foreign_key (TYPE)' class='foreign'>#type_id</span>
+  )</summary>
+  <ul>
+    <li>Le champ <i>product_id</i> constitue la clé primaire de la table. C'était déjà un identifiant de l'entité <i>PRODUCT</i>.</li>
+    <li>Les champs <i>product name</i>, <i>description</i>, <i>picture</i>, <i>price</i>, <i>rate</i> et <i>status</i> étaient déjà de simples attributs de l'entité <i>PRODUCT</i>.</li>
+    <li>Le champ <i>brand_id</i> est une clé étrangère. Il a migré par l'association de dépendance fonctionnelle <i>made</i> à partir de l'entité <i>BRAND</i> en perdant son caractère identifiant.</li>
+    <li>Le champ <i>category_id</i> est une clé étrangère. Il a migré par l'association de dépendance fonctionnelle <i>related to</i> à partir de l'entité <i>CATEGORY</i> en perdant son caractère identifiant.</li>
+    <li>Le champ <i>type_id</i> est une clé étrangère. Il a migré par l'association de dépendance fonctionnelle <i>is a</i> à partir de l'entité <i>TYPE</i> en perdant son caractère identifiant.</li>
+  </ul></details>
+</div>
+
+<div>
+  <details><summary><span class='relation'>TAG</span> (
+    <span title='primary_key (None)' class='primary'>tag_id</span>,
+    <span title='normal_attribute (None)' class='normal'>tag name</span>
+  )</summary>
+  <ul>
+    <li>Le champ <i>tag_id</i> constitue la clé primaire de la table. C'était déjà un identifiant de l'entité <i>TAG</i>.</li>
+    <li>Le champ <i>tag name</i> était déjà un simple attribut de l'entité <i>TAG</i>.</li>
+  </ul></details>
+</div>
+
+<div>
+  <details><summary><span class='relation'>TYPE</span> (
+    <span title='primary_key (None)' class='primary'>type_id</span>,
+    <span title='normal_attribute (None)' class='normal'>type name</span>
+  )</summary>
+  <ul>
+    <li>Le champ <i>type_id</i> constitue la clé primaire de la table. C'était déjà un identifiant de l'entité <i>TYPE</i>.</li>
+    <li>Le champ <i>type name</i> était déjà un simple attribut de l'entité <i>TYPE</i>.</li>
+  </ul></details>
+</div>
+
+<div>
+  <details><summary><span class='relation'>product_has_tag</span> (
+    <span title='primary_foreign_key (TAG)' class='foreign primary'>#tag_id</span>,
+    <span title='primary_foreign_key (PRODUCT)' class='foreign primary'>#product_id</span>
+  )</summary>
+  <ul>
+    <li>Le champ <i>tag_id</i> fait partie de la clé primaire de la table. C'est une clé étrangère qui a migré directement à partir de l'entité <i>TAG</i>.</li>
+    <li>Le champ <i>product_id</i> fait partie de la clé primaire de la table. C'est une clé étrangère qui a migré directement à partir de l'entité <i>PRODUCT</i>.</li>
+  </ul></details>
+</div>
+
+</div>
+</body>
+</html>

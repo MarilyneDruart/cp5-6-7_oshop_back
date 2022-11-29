@@ -1,0 +1,7 @@
+**APP_USER** (<ins>user_id</ins>, email, password, firstname, lastname, role, status)  
+**BRAND** (<ins>brand_id</ins>, brand name)  
+**CATEGORY** (<ins>category_id</ins>, category name, subtitle, picture, home order)  
+**PRODUCT** (<ins>product_id</ins>, product name, description, picture, price, rate, status, _#brand_id_, _#category_id_, _#type_id_)  
+**TAG** (<ins>tag_id</ins>, tag name)  
+**TYPE** (<ins>type_id</ins>, type name)  
+**product_has_tag** (<ins>_#tag_id_</ins>, <ins>_#product_id_</ins>)
