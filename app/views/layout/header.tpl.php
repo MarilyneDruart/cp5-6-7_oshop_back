@@ -8,7 +8,7 @@
     <title>oShop BackOffice | Catégories</title>
 
     <!-- Getting bootstrap (and reboot.css) -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!--
         And getting Font Awesome 4.7 (free)
@@ -27,4 +27,5 @@
 // On inclut des sous-vues => "partials"
 include __DIR__ . '/../partials/nav.tpl.php';
 ?>
+
 <div class="container my-4">

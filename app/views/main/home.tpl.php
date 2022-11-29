@@ -1,4 +1,4 @@
-<p class="display-4">
+        <p class="display-4">
             Bienvenue dans le backOffice <strong>Dans les shoe</strong>...
         </p>
 
@@ -84,7 +84,7 @@
                             </tbody>
                         </table>
                         <div class="d-grid gap-2">
-                            <a href="<?= $router->generate('products-list') ?>" class="btn btn-success">Voir plus</a>
+                            <a href="<?= $router->generate('product-list') ?>" class="btn btn-success">Voir plus</a>
                         </div>
                     </div>
                 </div>

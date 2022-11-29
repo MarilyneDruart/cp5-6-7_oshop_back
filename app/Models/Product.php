@@ -99,30 +99,42 @@ class Product extends CoreModel
     public static function findTheFirstThree()
     {
         $pdo = Database::getPDO();
-        $sql = 'SELECT * FROM `product` LIMIT 3';
+        $sql = 'SELECT * FROM product LIMIT 3';
         $pdoStatement = $pdo->query($sql);
-        $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Product');
-        //on peut mettre $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, self::class);
+        $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, self::class);
 
         return $results;
     }
 
     public function insert()
     {
-        // Récupération de l'objet PDO représentant la connexion à la DB
         $pdo = Database::getPDO();
 
-        // Ecriture de la requête INSERT INTO
-        $sql = "
-            INSERT INTO `product` (name, description, picture, price, status, category_id, brand_id, type_id)
-            VALUES ('{$this->name}', '{$this->description}', '{$this->picture}', '{$this->price}', '{$this->status}', '{$this->category_id}', '{$this->brand_id}', '{$this->type_id}')
-        ";
+        // On formatte notre future requête SQL avec nos paramètres nommés
+        $sql = 'INSERT INTO product (
+            name, description, picture, price, rate, status, category_id, brand_id, type_id
+        ) VALUES (
+            :name, :description, :picture, :price, :rate, :status, :category_id, :brand_id, :type_id
+        )';
 
-        // Execution de la requête d'insertion (exec, pas query)
-        $insertedRows = $pdo->exec($sql);
+        // 1. On prépare notre requête
+        $query = $pdo->prepare($sql);
 
-        // Si au moins une ligne ajoutée
-        if ($insertedRows > 0) {
+        // 2. On exécute la requête SQL en lui transmettant des valeurs pour les paramètres nommés
+        // execute retourne true si tout s'est passé et false sinon
+        $success = $query->execute([
+            ':name' => $this->name,
+            ':description' => $this->description,
+            ':picture' => $this->picture,
+            ':price' => $this->price,
+            ':rate' => $this->rate,
+            ':status' => $this->status,
+            ':brand_id' => $this->brand_id,
+            ':category_id' => $this->category_id,
+            ':type_id' => $this->type_id,
+        ]);
+
+        if ($success) {
             // Alors on récupère l'id auto-incrémenté généré par MySQL
             $this->id = $pdo->lastInsertId();
 
