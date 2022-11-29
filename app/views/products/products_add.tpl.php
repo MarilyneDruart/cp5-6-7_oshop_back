@@ -1,43 +1,7 @@
-<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="<?= $router->generate('main-home') ?>">oShop</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?= $router->generate('main-home') ?>">Accueil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="<?= $router->generate('category-list') ?>">Catégories <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?= $router->generate('products-list') ?>">Produits</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Types</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Marques</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Tags</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Sélection Accueil</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <div class="container my-4">
         <a href="<?= $router->generate('products-list') ?>" class="btn btn-success float-end">Retour</a>
         <h2>Ajouter un produit</h2>
-        
+    
         <form action="" method="POST" class="mt-5">
             <div class="mb-3">
                 <label for="name" class="form-label">Nom</label>
@@ -46,8 +10,6 @@
             <div class="mb-3">
                 <label for="subtitle" class="form-label">Description</label>
                 <input type="text" class="form-control" id="subtitle" placeholder="Description" aria-describedby="subtitleHelpBlock">
-                <small id="subtitleHelpBlock" class="form-text text-muted">
-                    Sera affiché sur la page d'accueil comme bouton devant l'image
                 </small>
             </div>
             <div class="mb-3">
@@ -57,8 +19,46 @@
                     URL relative d'une image (jpg, gif, svg ou png) fournie sur <a href="https://benoclock.github.io/S06-images/" target="_blank">cette page</a>
                 </small>
             </div>
+            <div class="mb-3">
+                <label for="price" class="form-label">Prix</label>
+                <input type="text" class="form-control" id="price" placeholder="Prix du produit">
+            </div>
+            <div class="mb-3">
+                <label for="status">Statut</label>
+                <select class="custom-select" id="status">
+                    <option>--</option>
+                    <option value="1">Actif</option>
+                    <option value="2">Inactif</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="category">Catégorie</label>
+                <select class="custom-select" id="category">
+                    <option>--</option>
+                    <option value="1">Détente</option>
+                    <option value="2">Au travail</option>
+                    <option value="3">Cérémonie</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="brand">Marque</label>
+                <select class="custom-select" id="brand">
+                    <option>--</option>
+                    <option value="1">oCirage</option>
+                    <option value="2">BOOTstrap</option>
+                    <option value="3">Talonette</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="type">Type</label>
+                <select class="custom-select" id="type">
+                    <option>--</option>
+                    <option value="1">Chaussures de ville</option>
+                    <option value="2">Chaussures de sport</option>
+                    <option value="3">Tongs</option>
+                </select>
+            </div>
             <div class="d-grid gap-2">
                 <button type="submit" class="btn btn-primary mt-5">Valider</button>
             </div>
         </form>
-    </div>

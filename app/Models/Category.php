@@ -99,7 +99,7 @@ class Category extends CoreModel
      * @param int $categoryId ID de la catégorie
      * @return Category
      */
-    public function find($categoryId)
+    public static function find($categoryId)
     {
         // se connecter à la BDD
         $pdo = Database::getPDO();
@@ -119,10 +119,11 @@ class Category extends CoreModel
 
     /**
      * Méthode permettant de récupérer tous les enregistrements de la table category
+     * On ajoute static, la méthode appartient ... voir replay depuis 11h03 +doc https://www.php.net/manual/fr/language.oop5.static.php
      *
      * @return Category[]
      */
-    public function findAll()
+    public static function findAll()
     {
         $pdo = Database::getPDO();
         $sql = 'SELECT * FROM `category`';
@@ -137,7 +138,7 @@ class Category extends CoreModel
      *
      * @return Category[]
      */
-    public function findAllHomepage()
+    public static function findAllHomepage()
     {
         $pdo = Database::getPDO();
         $sql = '
@@ -150,5 +151,18 @@ class Category extends CoreModel
         $categories = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Category');
 
         return $categories;
+    }
+
+    /**
+     * Récupère les 3 premières entrées
+     */
+    public static function findTheFirstThree()
+    {
+        $pdo = Database::getPDO();
+        $sql = 'SELECT * FROM `category` LIMIT 3';
+        $pdoStatement = $pdo->query($sql);
+        $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Category');
+
+        return $results;
     }
 }
