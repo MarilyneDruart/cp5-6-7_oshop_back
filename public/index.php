@@ -246,7 +246,28 @@ $router->map(
     'user-create'
 );
 
+/**
+ * Tag
+ */
+$router->map(
+    'GET',
+    '/tag/list',
+    [
+        'method' => 'tagList',
+        'controller' => '\App\Controllers\ProductController'
+    ],
+    'tag-list'
+);
 
+$router->map(
+    'GET',
+    '/tag/add',
+    [
+        'method' => 'addTag',
+        'controller' => '\App\Controllers\ProductController'
+    ],
+    'tag-add'
+);
 
 /* -------------
 --- DISPATCH ---
