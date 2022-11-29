@@ -41,4 +41,28 @@ abstract class CoreController
         require_once __DIR__ . '/../views/' . $viewName . '.tpl.php';
         require_once __DIR__ . '/../views/layout/footer.tpl.php';
     }
+
+    public function checkAuthorization($roles = [])
+    {
+        global $router;
+
+        // Si l'utilisateur est connecté
+        if (isset($_SESSION['userId'])) {
+            // Alors on récupère ses infos et son rôle
+            $user = $_SESSION['userObject'];
+            $role = $user->getRole();
+            // Si son rôle est autorisé à faire l'action qu'il tente d'effectuer
+            if (in_array($role, $roles)) {
+                return true;
+            }
+            // Sinon on envoi une erreur HTTP 403
+            http_response_code(403);
+            $this->show('error/err403');
+            die;
+        }
+
+        // Sinon on le redirige vers le formulaire de connexion
+        header('Location: ' . $router->generate('user-login'));
+        die;
+    }
 }

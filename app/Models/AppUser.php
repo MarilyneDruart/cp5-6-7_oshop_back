@@ -124,7 +124,8 @@ class AppUser extends CoreModel
         $this->status = $status;
     }
 
-    public static function find($appUserId)
+
+    public static function find($userId)
     {
         // se connecter à la BDD
         $pdo = Database::getPDO();
@@ -135,14 +136,14 @@ class AppUser extends CoreModel
         // exécuter notre requête
         $pdoStatement = $pdo->prepare($sql);
         $pdoStatement->execute([
-            ':id' => $appUserId,
+            ':id' => $userId,
         ]);
 
         // un seul résultat => fetchObject
-        $appUser = $pdoStatement->fetchObject('App\Models\AppUser');
+        $user = $pdoStatement->fetchObject('App\Models\AppUser');
 
         // retourner le résultat
-        return $appUser;
+        return $user;
     }
 
     /**
@@ -165,7 +166,11 @@ class AppUser extends CoreModel
         $pdo = Database::getPDO();
 
         // On formatte notre future requête SQL avec nos paramètres nommés
-        $sql = 'INSERT INTO `app_user` (name) VALUES (:name)';
+        $sql = 'INSERT INTO `app_user` (
+            email, password, firstname, lastname, role, status
+        ) VALUES (
+            :email, :password, :firstname, :lastname, :role, :status
+        )';
 
         // 1. On prépare notre requête
         $query = $pdo->prepare($sql);
@@ -173,7 +178,12 @@ class AppUser extends CoreModel
         // 2. On exécute la requête SQL en lui transmettant des valeurs pour les paramètres nommés
         // execute retourne true si tout s'est passé et false sinon
         $success = $query->execute([
-            ':name' => $this->name,
+            'email' => $this->email,
+            'password' => $this->password,
+            'firstname' => $this->firstname,
+            'lastname' => $this->lastname,
+            'role' => $this->role,
+            'status' => $this->status,
         ]);
 
         if ($success) {
@@ -193,12 +203,24 @@ class AppUser extends CoreModel
     {
         $pdo = Database::getPDO();
 
-        $sql = 'UPDATE `app_user` SET name = :name WHERE id = :id';
+        $sql = 'UPDATE `app_user`
+            SET email = :email,
+                password = :password,
+                firstname = :firstname,
+                lastname = :lastname,
+                role = :role,
+                status = :status
+            WHERE id = :id';
 
         $query = $pdo->prepare($sql);
 
         $success = $query->execute([
-            'name' => $this->name,
+            'email' => $this->email,
+            'password' => $this->password,
+            'firstname' => $this->firstname,
+            'lastname' => $this->lastname,
+            'role' => $this->role,
+            'status' => $this->status,
             'id' => $this->id,
         ]);
 
@@ -235,9 +257,9 @@ class AppUser extends CoreModel
         ]);
 
         // un seul résultat => fetchObject
-        $appUserEmail = $pdoStatement->fetchObject('App\Models\AppUser');
+        $user = $pdoStatement->fetchObject('App\Models\AppUser');
 
         // retourner le résultat
-        return $appUserEmail;
+        return $user;
     }
 }

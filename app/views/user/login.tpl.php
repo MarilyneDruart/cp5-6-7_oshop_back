@@ -1,6 +1,6 @@
-<h2>Se connecter</h2>
+<h2 class="text-center">Se connecter</h2>
 
-<form action="<?= $router->generate('login-post') ?>" method='post'>
+<form action="<?= $router->generate('user-login-post') ?>" method='post'>
     <div>
         <label for="email" class="form-label">Email :</label>
         <input type="text" class="form-control" id="email" name="email" value="<?= $_POST['email'] ?? '' ?>" placeholder="Email">

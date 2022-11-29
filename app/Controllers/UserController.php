@@ -6,16 +6,49 @@ use App\Models\AppUser;
 
 class UserController extends CoreController
 {
-    public function login($email) {
-
-        $email = AppUser::findByEmail($email);
-        
-        if $email
-
+    /**
+     * Formulaire de connexion
+     */
+    public function login()
+    {
         $this->show('user/login');
     }
 
-    public function loginPost () {
-        $this->show('user/login');
+    /**
+     * Traitement du formulaire de connexion
+     */
+    public function loginPost()
+    {
+        global $router;
+
+        extract($_POST, EXTR_SKIP);
+
+        $user = AppUser::findByEmail($email ?? '');
+
+        if ($user && password_verify($password, $user->getPassword())) {
+            $_SESSION['userId'] = $user->getId();
+            $_SESSION['userObject'] = $user;
+            header('Location: ' . $router->generate('main-home'));
+        } else {
+            //header('Location: ' . $router->generate('user-login'));
+            echo 'Identifiants erronés.';
+
+        }
     }
+
+    /**
+     * Déconnexion
+     */
+    public function logout()
+    {
+        global $router;
+
+        unset(
+            $_SESSION['userId'],
+            $_SESSION['userObject'],
+        );
+
+        header('Location: ' . $router->generate('user-login'));
+    }
+
 }
