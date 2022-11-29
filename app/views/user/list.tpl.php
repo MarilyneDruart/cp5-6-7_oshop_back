@@ -1,22 +1,29 @@
-    <a href="<?= $router->generate('category-add') ?>" class="btn btn-success float-end">Ajouter</a>
-    <h2>Liste des catégories</h2>
+<a href="<?= $router->generate('user-add') ?>" class="btn btn-success float-end">Ajouter</a>
+    <h2>Liste des utilisateurs</h2>
     <table class="table table-hover mt-4">
         <thead>
             <tr>
                 <th scope="col">#</th>
+                <th scope="col">Email</th>
+                <th scope="col">Mot de passe</th>
+                <th scope="col">Prénom</th>
                 <th scope="col">Nom</th>
-                <th scope="col">Sous-titre</th>
-                <th scope="col"></th>
+                <th scope="col">Rôle</th>
+                <th scope="col">Statut</th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($categories as $category) : ?>
+            <?php foreach ($users as $user) : ?>
             <tr>
-                <th scope="row"><?= $category->getId() ?></th>
-                <td><?= $category->getName() ?></td>
-                <td><?= $category->getSubtitle() ?></td>
+                <th scope="row"><?= $user->getId() ?></th>
+                <td><?= $user->getEmail() ?></td>
+                <td><?= $user->getPassword() ?></td>
+                <td><?= $user->getFirstname() ?></td>
+                <td><?= $user->getLastname() ?></td>
+                <td><?= $user->getRole() ?></td>
+                <td><?= $user->getStatus() ?></td>
                 <td class="text-end">
-                    <a href="<?= $router->generate('category-edit', ['id' => $category->getId()]) ?>" class="btn btn-sm btn-warning">
+                    <a href="" class="btn btn-sm btn-warning">
                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                     </a>
                     <!-- Example single danger button -->
