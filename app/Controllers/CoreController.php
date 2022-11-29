@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-class CoreController
+abstract class CoreController
 {
     /**
      * Méthode permettant d'afficher du code HTML en se basant sur les views

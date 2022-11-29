@@ -38,8 +38,10 @@ class ProductController extends CoreController
     /**
      * Ajout d'un produit
      */
-    public function store()
+    public function store($id = null)
     {
+        $forUpdate = isset($id);
+
         extract($_POST, EXTR_SKIP);
 
         $errors = [];
@@ -83,7 +85,7 @@ class ProductController extends CoreController
         }
 
         if (!$errors) {
-            $product = new Product();
+            $product = $forUpdate ? Product::find($id) : new Product();
 
             $product->setName(htmlspecialchars($name));
             $product->setDescription(isset($description) ? htmlspecialchars($description) : null);
@@ -95,9 +97,10 @@ class ProductController extends CoreController
             $product->setCategoryId($category);
             $product->setTypeId($type);
 
-            if ($product->insert()) {
+            if ($product->save()) {
                 global $router;
-                header('Location: ' . $router->generate('product-list'));
+                $redirect = $forUpdate ? $router->generate('product-edit', ['id' => $product->getId()]) : $router->generate('product-list');
+                header('Location: ' . $redirect);
                 return;
             } else {
                 $errors[] = 'Echec lors de l\'enregistrement';
@@ -108,8 +111,40 @@ class ProductController extends CoreController
         $brands = Brand::findAll();
         $types = Type::findAll();
 
-        $this->show('product/add', [
-            'errors' => $errors,
+        if ($forUpdate) {
+            $this->show('product/edit', [
+                'errors' => $errors,
+                'categories' => $categories,
+                'brands' => $brands,
+                'types' => $types,
+                'product' => Product::find($id),
+            ]);
+        } else {
+            $this->show('product/add', [
+                'errors' => $errors,
+                'categories' => $categories,
+                'brands' => $brands,
+                'types' => $types,
+            ]);
+        }
+    }
+
+    public function edit($id)
+    {
+        $product = Product::find($id);
+
+        if (!$product) {
+            $error = new ErrorController();
+            $error->err404();
+            return;
+        }
+
+        $categories = Category::findAll();
+        $brands = Brand::findAll();
+        $types = Type::findAll();
+
+        $this->show('product/edit', [
+            'product' => $product,
             'categories' => $categories,
             'brands' => $brands,
             'types' => $types,

@@ -32,10 +32,13 @@ class Type extends CoreModel
         $pdo = Database::getPDO();
 
         // écrire notre requête
-        $sql = 'SELECT * FROM `type` WHERE `id` =' . $typeId;
+        $sql = 'SELECT * FROM type WHERE id = :id';
 
         // exécuter notre requête
-        $pdoStatement = $pdo->query($sql);
+        $pdoStatement = $pdo->prepare($sql);
+        $pdoStatement->execute([
+            ':id' => $typeId,
+        ]);
 
         // un seul résultat => fetchObject
         $type = $pdoStatement->fetchObject('App\Models\Type');
@@ -57,6 +60,16 @@ class Type extends CoreModel
         $results = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Type');
 
         return $results;
+    }
+
+    public function insert()
+    {
+
+    }
+
+    public function update()
+    {
+
     }
 
     /**

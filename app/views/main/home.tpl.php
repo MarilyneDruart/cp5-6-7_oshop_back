@@ -1,4 +1,4 @@
-        <p class="display-4">
+<p class="display-4">
             Bienvenue dans le backOffice <strong>Dans les shoe</strong>...
         </p>
 
@@ -21,7 +21,7 @@
                                     <th scope="row"><?= $category->getId(); ?></th>
                                     <td><?= $category->getName(); ?></td>
                                     <td class="text-end">
-                                        <a href="" class="btn btn-sm btn-warning">
+                                        <a href="<?= $router->generate('category-edit', ['id' => $category->getId()]) ?>" class="btn btn-sm btn-warning">
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                         </a>
                                         <!-- Example single danger button -->
@@ -64,7 +64,7 @@
                                     <th scope="row"><?= $product->getId(); ?></th>
                                     <td><?= $product->getName(); ?></td>
                                     <td class="text-end">
-                                        <a href="" class="btn btn-sm btn-warning">
+                                        <a href="<?= $router->generate('product-edit', ['id' => $product->getId()]) ?>" class="btn btn-sm btn-warning">
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                         </a>
                                         <!-- Example single danger button -->

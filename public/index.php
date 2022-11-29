@@ -97,13 +97,11 @@ $router->map(
     'POST',
     '/category/[i:id]/edit',
     [
-        'method' => 'update',
+        'method' => 'store',
         'controller' => '\App\Controllers\CategoryController'
     ],
     'category-update'
 );
-
-
 
 /**
  * Produits
@@ -136,6 +134,26 @@ $router->map(
         'controller' => '\App\Controllers\ProductController'
     ],
     'product-create'
+);
+
+$router->map(
+    'GET',
+    '/product/[i:id]/edit',
+    [
+        'method' => 'edit',
+        'controller' => '\App\Controllers\ProductController'
+    ],
+    'product-edit'
+);
+
+$router->map(
+    'POST',
+    '/product/[i:id]/edit',
+    [
+        'method' => 'store',
+        'controller' => '\App\Controllers\ProductController'
+    ],
+    'product-update'
 );
 
 /* -------------

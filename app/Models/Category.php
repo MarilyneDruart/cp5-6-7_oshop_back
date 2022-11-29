@@ -105,10 +105,13 @@ class Category extends CoreModel
         $pdo = Database::getPDO();
 
         // écrire notre requête
-        $sql = 'SELECT * FROM `category` WHERE `id` =' . $categoryId;
+        $sql = 'SELECT * FROM category WHERE id = :id';
 
         // exécuter notre requête
-        $pdoStatement = $pdo->query($sql);
+        $pdoStatement = $pdo->prepare($sql);
+        $pdoStatement->execute([
+            ':id' => $categoryId,
+        ]);
 
         // un seul résultat => fetchObject
         $category = $pdoStatement->fetchObject('App\Models\Category');
@@ -200,32 +203,20 @@ class Category extends CoreModel
     {
         $pdo = Database::getPDO();
 
-        // On formatte notre future requête SQL avec nos paramètres nommés
-        $sql = 'UPDATE category SET (name, subtitle, picture) VALUES (:name, :subtitle, :picture) WHERE '.$_POST['id'].' = :id';
+        $sql = 'UPDATE category
+            SET name = :name, subtitle = :subtitle, picture = :picture
+            WHERE id = :id
+        ';
 
-        // 1. On prépare notre requête
         $query = $pdo->prepare($sql);
 
-        // 2. On exécute la requête SQL en lui transmettant des valeurs pour les paramètres nommés
-        // execute retourne true si tout s'est passé et false sinon
         $success = $query->execute([
-            ':name' => $this->name,
-            ':subtitle' => $this->subtitle,
-            ':picture' => $this->picture,
+            'name' => $this->name,
+            'subtitle' => $this->subtitle,
+            'picture' => $this->picture,
+            'id' => $this->id,
         ]);
 
-        if ($success) {
-            // Alors on récupère les infos auto-incrémenté généré par MySQL
-            $this->name = $pdo->lastInsertId();
-            $this->subtitle = $pdo->lastInsertId();
-            $this->picture = $pdo->lastInsertId();
-
-            // On retourne VRAI car l'ajout a parfaitement fonctionné
-            return true;
-            // => l'interpréteur PHP sort de cette fonction car on a retourné une donnée
-        }
-
-        // Si on arrive ici, c'est que quelque chose n'a pas bien fonctionné => FAUX
-        return false;
+        return $success;
     }
 }
