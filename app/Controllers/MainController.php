@@ -18,7 +18,7 @@ class MainController extends CoreController
      */
     public function home()
     {
-        $this->checkAuthorization(['admin', 'catalog-manager']);
+        //$this->checkAuthorization(['admin', 'catalog-manager']); remplacé dans CoreController
 
         $categories = Category::findTheFirstThree();
         $products = Product::findTheFirstThree();

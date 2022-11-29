@@ -37,12 +37,12 @@
             <div>
                 <?php if (!isset($_SESSION['userId'])) : ?>
                     <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#enroll" >           
-                                <a class="navbar-brand" href="<?= $router->generate('user-login') ?>">Connexion</a>
+                                <a class="navbar-brand fs-6" href="<?= $router->generate('user-login') ?>">Connexion</a>
                     </button>
                 <?php endif; ?>
                 <?php if (isset($_SESSION['userId'])) : ?>
                     <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#enroll" >           
-                                <a class="navbar-brand" href="<?= $router->generate('user-logout') ?>">Déconnexion</a>
+                                <a class="navbar-brand fs-6" href="<?= $router->generate('user-logout') ?>">Déconnexion</a>
                     </button>
                 <?php endif; ?>
             </div>

@@ -5,7 +5,6 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Email</th>
-                <th scope="col">Mot de passe</th>
                 <th scope="col">Prénom</th>
                 <th scope="col">Nom</th>
                 <th scope="col">Rôle</th>
@@ -17,7 +16,6 @@
             <tr>
                 <th scope="row"><?= $user->getId() ?></th>
                 <td><?= $user->getEmail() ?></td>
-                <td><?= $user->getPassword() ?></td>
                 <td><?= $user->getFirstname() ?></td>
                 <td><?= $user->getLastname() ?></td>
                 <td><?= $user->getRole() ?></td>
