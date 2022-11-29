@@ -34,6 +34,9 @@ abstract class CoreController
             'category-update' => ['admin', 'catalog-manager'],
             'category-home-selection' => ['admin', 'catalog-manager'],
 
+            'tag-list' => ['admin', 'catalog-manager'],
+            'tag-add' => ['admin', 'catalog-manager'],
+
         ];
 
         if (array_key_exists($route_name, $acl)) {

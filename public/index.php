@@ -248,25 +248,13 @@ $router->map(
 
 $router->map(
     'GET',
-    '/user/[i:id]/edit',
+    '/tag/add',
     [
-        'method' => 'edit',
-        'controller' => '\App\Controllers\UserController'
+        'method' => 'addTag',
+        'controller' => '\App\Controllers\ProductController'
     ],
-    'user-edit'
+    'tag-add'
 );
-
-$router->map(
-    'POST',
-    '/user/[i:id]/edit',
-    [
-        'method' => 'store',
-        'controller' => '\App\Controllers\UserController'
-    ],
-    'user-update'
-);
-
-
 
 /* -------------
 --- DISPATCH ---

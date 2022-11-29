@@ -16,8 +16,10 @@ class ProductController extends CoreController
     public function list()
     {
         $products = Product::findAll();
+        $tags = Product::findAll();
         $this->show('product/list', [
             'products' => $products,
+            'tags' => $tags,
         ]);
     }
 
@@ -85,6 +87,10 @@ class ProductController extends CoreController
             $errors[] = 'Le type est invalide';
         }
 
+        if (!isset($product_tags) || !filter_var($product_tags, FILTER_VALIDATE_INT)) {
+            $errors[] = 'Le type est invalide';
+        }
+
         if (!$errors) {
             $product = $forUpdate ? Product::find($id) : new Product();
 
@@ -97,6 +103,7 @@ class ProductController extends CoreController
             $product->setBrandId($brand);
             $product->setCategoryId($category);
             $product->setTypeId($type);
+            $product->setTypeId($product_tags);
 
             if ($product->save()) {
                 global $router;
@@ -111,6 +118,7 @@ class ProductController extends CoreController
         $categories = Category::findAll();
         $brands = Brand::findAll();
         $types = Type::findAll();
+        $product_tags = Tag::findAllByProductId($id);
 
         if ($forUpdate) {
             $tags = Tag::findAll();
@@ -158,6 +166,28 @@ class ProductController extends CoreController
             'types' => $types,
             'tags' => $tags,
             'product_tags' => $product_tags,
+        ]);
+    }
+
+    /**
+     * Listing des tags
+     */
+    public function tagList()
+    {
+        $tags = Tag::findAll();
+        $this->show('tag/list', [
+            'tags' => $tags,
+        ]);
+    }
+
+    /**
+     * Ajout d'un tag
+     */
+    public function addTag()
+    {
+        $tags = Tag::findAll();
+        $this->show('tag/list', [
+            'tags' => $tags,
         ]);
     }
 }
