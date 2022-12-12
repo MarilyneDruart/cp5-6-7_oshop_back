@@ -19,7 +19,7 @@
                 <label for="picture" class="form-label">Image</label>
                 <input type="text" class="form-control" id="picture" name="picture" value="<?= $_POST['picture'] ?? $category->getPicture() ?>" placeholder="image jpg, gif, svg, png" aria-describedby="pictureHelpBlock">
                 <small id="pictureHelpBlock" class="form-text text-muted">
-                    URL relative d'une image (jpg, gif, svg ou png) fournie sur <a href="https://benoclock.github.io/S06-images/" target="_blank">cette page</a>
+                    URL relative d'une image (jpg, gif, svg ou png) fournie sur <a href="#" target="_blank">cette page</a>
                 </small>
             </div>
             <div class="d-grid gap-2">
