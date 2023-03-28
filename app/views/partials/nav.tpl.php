@@ -23,9 +23,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Marques</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?= $router->generate('tag-list') ?>">Tags</a>
-                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="
+                        
+                        ">Tags</a>
+                    </li> -->
                     <li class="nav-item">
                         <a class="nav-link" href="<?= $router->generate('category-home-selection') ?>">Sélection Accueil</a>
                     </li>
